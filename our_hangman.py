@@ -1,5 +1,6 @@
 import random
 
+
 class bcolors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -10,7 +11,9 @@ class bcolors:
     ENDC = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
-#print(bcolors.FAIL + "Example text" + bcolors.ENDC)
+
+
+# print(bcolors.FAIL + "Example text" + bcolors.ENDC)
 
 words = ["Marysia", "Asia", "Kasia", "Amadeusz", "Encyklopedia", "Jedenm"]
 
@@ -27,94 +30,101 @@ HANGMAN = (
  |
 ----------
 """,
-"""
- ------
- |    |
- |    O
- |
- |
- |
- |
- |
- |
-----------
-""",
-"""
- ------
- |    |
- |    O
- |   -+-
- | 
- |   
- |   
- |   
- |   
-----------
-""",
-"""
- ------
- |    |
- |    O
- |  /-+-
- |   
- |   
- |   
- |   
- |   
-----------
-""",
-"""
- ------
- |    |
- |    O
- |  /-+-/
- |   
- |   
- |   
- |   
- |   
-----------
-""",
-"""
- ------
- |    |
- |    O
- |  /-+-/
- |    |
- |   
- |   
- |   
- |   
-----------
-""",
-"""
- ------
- |    |
- |    O
- |  /-+-/
- |    |
- |    |
- |   | 
- |   | 
- |   
-----------
-""",
-"""
- ------
- |    |
- |    O
- |  /-+-/
- |    |
- |    |
- |   | |
- |   | |
- |  
-----------
-""")
+    """
+     ------
+     |    |
+     |    O
+     |
+     |
+     |
+     |
+     |
+     |
+    ----------
+    """,
+    """
+     ------
+     |    |
+     |    O
+     |   -+-
+     | 
+     |   
+     |   
+     |   
+     |   
+    ----------
+    """,
+    """
+     ------
+     |    |
+     |    O
+     |  /-+-
+     |   
+     |   
+     |   
+     |   
+     |   
+    ----------
+    """,
+    """
+     ------
+     |    |
+     |    O
+     |  /-+-/
+     |   
+     |   
+     |   
+     |   
+     |   
+    ----------
+    """,
+    """
+     ------
+     |    |
+     |    O
+     |  /-+-/
+     |    |
+     |   
+     |   
+     |   
+     |   
+    ----------
+    """,
+    """
+     ------
+     |    |
+     |    O
+     |  /-+-/
+     |    |
+     |    |
+     |   | 
+     |   | 
+     |   
+    ----------
+    """,
+    """
+     ------
+     |    |
+     |    O
+     |  /-+-/
+     |    |
+     |    |
+     |   | |
+     |   | |
+     |  
+    ----------
+    """)
+
+
+def case_insensivity(user_input, target_word):
+    upper_user_input = user_input.upper()
+    upper_target_word = target_word.upper()
+    return upper_user_input, upper_target_word
 
 def get_name():
     player_name = input("Please enter your name. ")
     return player_name
+
 
 def get_level():
     print("Please select level of difficulty: ")
@@ -124,7 +134,7 @@ def get_level():
     level = int(input(""))
     while level > 3 or level <= 0:
         level = int(input("You have chosen wrong level, please try again. "))
-        
+
     if level == 1:
         print("You've chosen easy level. ")
     elif level == 2:
@@ -133,28 +143,29 @@ def get_level():
         print("You've chosen hard level. ")
     return int(level)
 
-def get_word(words, level):
 
-    word_number = random.randint(0, len(words) -1)
+def get_word(words, level):
+    word_number = random.randint(0, len(words) - 1)
     word = words[word_number]
 
     if level == 1:
         while len(word) > 5:
-            word_number = random.randint(0, len(words) -1)
+            word_number = random.randint(0, len(words) - 1)
             word = words[word_number]
         return word
 
     elif level == 2:
         while len(word) <= 5 or len(word) > 8:
-            word_number = random.randint(0, len(words) -1)
+            word_number = random.randint(0, len(words) - 1)
             word = words[word_number]
-        return word 
+        return word
 
     else:
         while len(word) <= 8:
-            word_number = random.randint(0, len(words) -1)
+            word_number = random.randint(0, len(words) - 1)
             word = words[word_number]
         return word
+
 
 def damage(level):
     if level == 1:
@@ -165,10 +176,9 @@ def damage(level):
         damage = 3
     return damage
 
-def get_hangman(max_wrong_guesses):
-    return int(max_wrong_guesses / (len(HANGMAN)-1 ))
-    
 
+def get_hangman(max_wrong_guesses):
+    return int(max_wrong_guesses / (len(HANGMAN) - 1))
 
 
 def main():
@@ -177,15 +187,12 @@ def main():
     print("Welcome", player_name, "to Hangman. ")
     level = get_level()
     word = get_word(words, level)
-    max_wrong_guesses = 21 # Must be every 7
-    wrong_guesses = 0 # Starting value
+    max_wrong_guesses = 21  # Must be every 7
+    wrong_guesses = 0  # Starting value
     index = int(wrong_guesses / get_hangman(max_wrong_guesses))
     print(HANGMAN[index])
     # while wrong_guesses < max_wrong_guesses:
     #     if wrong_guesses < get_hangman(max_wrong_guesses):
-        
-
-
 
 
 if __name__ == '__main__':
